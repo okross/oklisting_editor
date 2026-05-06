@@ -37,10 +37,10 @@ with main_col:
                 st.error("🚨 警告：偵測到 Emoji！平台規範嚴格禁止，建議立刻移除。")
             
             # 2. 偵測非建議標點符號 (黃色提醒)
-            # 定義建議使用的符號清單
-            suggested_symbols = '. , - % " ( )'
-            # 找出所有不合法的符號並去重
-            invalid_chars = set(re.findall(r'[^a-zA-Z0-9\s.,\-%"()]', text))
+            # 更新建議使用的符號清單：加入冒號 :
+            suggested_symbols = '. , - % " ( ) :'
+            # 找出所有不合法的符號並去重 (允許清單中加入 :)
+            invalid_chars = set(re.findall(r'[^a-zA-Z0-9\s.,\-%"():]', text))
             
             if invalid_chars:
                 # 將找出的不合法符號轉為字串顯示
@@ -123,7 +123,6 @@ with main_col:
             else:
                 html_content = "<div style='display: flex; flex-wrap: wrap; gap: 6px; overflow-y: auto; max-height: 400px; padding: 5px;'>"
                 for kw in sorted(list(kw_set)): 
-                    # 準確比對單字
                     count = len(re.findall(rf'\b{re.escape(kw)}\b', all_text))
                     bg = "#d4edda" if count > 0 else "#f8d7da"
                     color = "#155724" if count > 0 else "#721c24"
