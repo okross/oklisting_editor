@@ -1,0 +1,13 @@
+[server]
+# 禁止跨來源請求與 XSRF 保護
+enableXsrfProtection = true
+enableCORS = false
+
+# 讓 Streamlit 不允許被 iframe 嵌入 (解決 Clickjacking)
+# 注意：最新版 Streamlit 參數為 frameFeatures，但有些版本是直接禁止
+# 我們補上下方這行更保險
+enableStaticServing = false
+
+[client]
+# 隱藏右下角的開發者工具選單，減少資訊洩漏
+toolbarMode = "minimal"
